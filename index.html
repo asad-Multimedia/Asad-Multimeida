@@ -120,20 +120,25 @@
     nameInput.addEventListener('input', () => {
       nameText.textContent = nameInput.value || "Your Name";
     });
+function downloadCard() {
+  const card = document.getElementById("card"); // your card container
 
-    function downloadCard() {
-      const card = document.getElementById('card');
-      html2canvas(card).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'NationalDayCard.png';
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    }
+  html2canvas(card, {
+    useCORS: true, // allow external images
+    allowTaint: false,
+    scale: 2 // higher resolution
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "national-day-card.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}
   </script>
 
   <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
+
 
