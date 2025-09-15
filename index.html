@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>National Day Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+      padding: 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: row; /* desktop default */
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 250px;
+      max-width: 90%;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #007B55;
+      color: white;
+      cursor: pointer;
+      width: auto;
+      max-width: 200px;
+    }
+
+    button:hover {
+      background: #005f3d;
+    }
+
+    #card {
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    #card img {
+      width: 100%;
+      height: auto;
+      border-radius: 0px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #nameText {
+      position: absolute;
+      top: 89.7%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(12px, 4vw, 16px); /* smaller font size */
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      white-space: nowrap;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 1200px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+      .controls {
+        flex-direction: column; /* stack input & button vertically */
+        gap: 15px;
+      }
+      button {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>✨ Create Your National Day Card ✨</h2>
+
+  <!-- Input and button grouped -->
+  <div class="controls">
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="downloadCard()">Download Card</button>
+  </div>
+
+  <!-- Card -->
+  <div id="card">
+    <img id="cardImage" src="https://multimediaclub.co/wp-content/uploads/2025/09/card-1-scaled.jpg" alt="Card Background">
+    <div id="nameText">Your Name</div>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('nameInput');
+    const nameText = document.getElementById('nameText');
+
+    nameInput.addEventListener('input', () => {
+      nameText.textContent = nameInput.value || "Your Name";
+    });
+
+    function downloadCard() {
+      const card = document.getElementById('card');
+      html2canvas(card).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'NationalDayCard.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
+
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
