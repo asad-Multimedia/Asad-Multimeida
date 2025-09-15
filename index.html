@@ -121,16 +121,17 @@
       nameText.textContent = nameInput.value || "Your Name";
     });
 function downloadCard() {
-  const card = document.getElementById("card"); // your card container
+  const card = document.getElementById("card");
 
   html2canvas(card, {
-    useCORS: true, // allow external images
+    useCORS: true,   // handle external images
     allowTaint: false,
-    scale: 2 // higher resolution
+    scale: 3,        // increase scale (try 2 or 3 for sharper results)
+    backgroundColor: null // keep transparent if needed
   }).then(canvas => {
     const link = document.createElement("a");
     link.download = "national-day-card.png";
-    link.href = canvas.toDataURL("image/png");
+    link.href = canvas.toDataURL("image/png", 1.0); // 1.0 = best quality
     link.click();
   });
 }
@@ -140,5 +141,6 @@ function downloadCard() {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
+
 
 
